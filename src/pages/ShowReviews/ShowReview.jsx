@@ -32,6 +32,7 @@ const ShowReviews = ({ placeId }) => {
     console.log(value);
   }, []);
   return (
+    <div className="bg">
     <Container>
       <Box ml={2} mt={2}>
         <Typography
@@ -79,6 +80,7 @@ const ShowReviews = ({ placeId }) => {
         <ListReview placeId={placeId} />
       </Box>
     </Container>
+    </div>
   );
 };
 

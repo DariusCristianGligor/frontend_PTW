@@ -21,10 +21,10 @@ const Categories = () => {
   };
   const classes = useStyles();
   return (
-    <div>
+    <div className="bg">
       <Box mt={2}>
         <Button
-          className={classes.buttonAdd}
+          className={classes.buttonAdd}s
           type="submit"
           color="primary"
           variant="contained"

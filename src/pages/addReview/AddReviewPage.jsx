@@ -64,6 +64,7 @@ const AddReview = ({ placeId }) => {
   };
   const history = useHistory();
   return (
+    <div className="bg">
     <Container>
       <Box m={2}>
         <Typography
@@ -196,6 +197,7 @@ const AddReview = ({ placeId }) => {
         </Box>
       </form>
     </Container>
+    </div>
   );
 };
 export default AddReview;

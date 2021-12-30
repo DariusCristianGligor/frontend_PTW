@@ -39,6 +39,7 @@ const Places = ({ setPlaceId, searchTerm, city, selectedCategories }) => {
   const history = useHistory();
   const classes = useStyles();
   return (
+    <div className="bg">
     <Container>
       <Box mt={2}>
         <Button
@@ -64,6 +65,7 @@ const Places = ({ setPlaceId, searchTerm, city, selectedCategories }) => {
         selectedCategories={selectedCategories}
       ></List3>
     </Container>
+    </div>
   );
 };
 

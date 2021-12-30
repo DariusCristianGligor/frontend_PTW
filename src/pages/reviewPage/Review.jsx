@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 const Reviews = () => {
-  return <div className="bg">Reviewssss</div>;
+  return <div >Reviewssss</div>;
 };
 
 export default Reviews;

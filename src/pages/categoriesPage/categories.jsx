@@ -21,7 +21,7 @@ const Categories = () => {
   };
   const classes = useStyles();
   return (
-    <div className="bg">
+    <div >
       <Box mt={2}>
         <Button
           className={classes.buttonAdd}s

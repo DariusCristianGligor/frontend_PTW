@@ -16,7 +16,7 @@ import FormControl from "@material-ui/core/FormControl";
 import FormLabel from "@material-ui/core/FormLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 const Register = () => {
-  const paperStyle = { padding: "30px 20px", width: 300, margin: "20px auto" };
+  const paperStyle = { padding: "30px 20px", width: 500, margin: "20px auto" };
   const headerStyle = { margin: 0 };
   const marginTop = { marginTop: 5 };
   const [username, setUsername] = useState("");
@@ -96,6 +96,7 @@ const Register = () => {
   };
 
   return (
+    <div className="bg">
     <Grid>
       <Paper elevation={20} style={paperStyle}>
         <Grid align="center">
@@ -213,7 +214,9 @@ const Register = () => {
           ) : (
             ""
           )}
-          <Button
+          
+        </form>
+        <Button
             type="submit"
             onClick={(e) => {
               e.preventDefault();
@@ -238,9 +241,9 @@ const Register = () => {
           >
             Sign up
           </Button>
-        </form>
       </Paper>
     </Grid>
+    </div>
   );
 };
 

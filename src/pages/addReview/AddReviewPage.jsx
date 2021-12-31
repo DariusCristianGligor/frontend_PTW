@@ -24,6 +24,19 @@ const AddReview = ({ placeId }) => {
     { name: "Expensive", id: "Expensive" },
   ]);
   const [selectedCostOfPlace, setSelectedCostOfPlace] = useState([]);
+  useEffect(() => {
+    (async () => {
+      const response = await fetch(
+        `${process.env.REACT_APP_ENDPOINT}/Auth/user`,
+        {
+          headers: { "Content-Type": "application/json" },
+          credentials: "include",
+        }
+      );
+      const resp = await response.json();
+      console.log(resp);
+    })();
+  });
   const Input = styled("input")({
     display: "none",
   });
@@ -65,138 +78,138 @@ const AddReview = ({ placeId }) => {
   const history = useHistory();
   return (
     <div className="bg">
-    <Container>
-      <Box m={2}>
-        <Typography
-          variant="h6"
-          color="textprimary"
-          component="h2"
-          gutterBottom
-        >
-          Create a new Review
-        </Typography>
-      </Box>
-      <form onSubmit={uploadFile}>
+      <Container>
         <Box m={2}>
-          <Select2
-            disabled={false}
-            options={costOfPlace}
-            width={"100%"}
-            name={"CostOfPlace"}
-            value={"CostOfPlace"}
-            label="Cost of place"
-            onChange={(e) => {
-              console.log(e.target.value);
-              setSelectedCostOfPlace(e.target.value);
-            }}
-          />
+          <Typography
+            variant="h6"
+            color="textprimary"
+            component="h2"
+            gutterBottom
+          >
+            Create a new Review
+          </Typography>
         </Box>
-        <Box m={2}>
-          <MyTextField
-            onChangeTextField={(a) => {
-              console.log("description:", a);
-              setDescription(a);
-            }}
-            label="Description"
-            name="Description"
-            variant="outlined"
-            color="primary"
-            multiline={true}
-            rows={2}
-            min={5}
-            max={100}
-            errorMessaje={
-              "The description length should be between 5 and 100 characters"
-            }
-            required={true}
-          />
-        </Box>
-        <Box m={2}>
-          <Typography component="legend">Rating</Typography>
-          <Rating
-            name="simple-controlled"
-            value={value}
-            onChange={(event, newValue) => {
-              setValue(newValue);
-            }}
-          />
-        </Box>
-        <Box m={2}>
-          <label htmlFor="contained-button-file">
-            <Input
-              accept="image/*"
-              id="contained-button-file"
-              multiple
-              type="file"
-              onChange={saveFile}
+        <form onSubmit={uploadFile}>
+          <Box m={2}>
+            <Select2
+              disabled={false}
+              options={costOfPlace}
+              width={"100%"}
+              name={"CostOfPlace"}
+              value={"CostOfPlace"}
+              label="Cost of place"
+              onChange={(e) => {
+                console.log(e.target.value);
+                setSelectedCostOfPlace(e.target.value);
+              }}
             />
+          </Box>
+          <Box m={2}>
+            <MyTextField
+              onChangeTextField={(a) => {
+                console.log("description:", a);
+                setDescription(a);
+              }}
+              label="Description"
+              name="Description"
+              variant="outlined"
+              color="primary"
+              multiline={true}
+              rows={2}
+              min={5}
+              max={100}
+              errorMessaje={
+                "The description length should be between 5 and 100 characters"
+              }
+              required={true}
+            />
+          </Box>
+          <Box m={2}>
+            <Typography component="legend">Rating</Typography>
+            <Rating
+              name="simple-controlled"
+              value={value}
+              onChange={(event, newValue) => {
+                setValue(newValue);
+              }}
+            />
+          </Box>
+          <Box m={2}>
+            <label htmlFor="contained-button-file">
+              <Input
+                accept="image/*"
+                id="contained-button-file"
+                multiple
+                type="file"
+                onChange={saveFile}
+              />
+              <Button
+                variant="contained"
+                component="span"
+                sx={{
+                  width: 150,
+                }}
+                endIcon={<UploadIcon />}
+              >
+                Upload
+              </Button>
+            </label>
+          </Box>
+          {images.length > 0 ? (
+            <Box m={2}>
+              <WovenImageList
+                height={280}
+                width={"100%"}
+                itemData={images}
+              ></WovenImageList>
+            </Box>
+          ) : (
+            ""
+          )}
+          <Box m={2}>
             <Button
+              onClick={() => {
+                if (images.length == 0) {
+                  let k = file.length;
+                  let z = [];
+                  for (let x = 0; x < k; x++) {
+                    z = [...z, URL.createObjectURL(file[x])];
+                    console.log(x);
+                  }
+                  setImages(z);
+                  console.log(images);
+                } else {
+                  setImages([]);
+                }
+              }}
+              color="primary"
               variant="contained"
-              component="span"
+              endIcon={<PhotoCamera />}
               sx={{
                 width: 150,
               }}
-              endIcon={<UploadIcon />}
             >
-              Upload
+              Photos
             </Button>
-          </label>
-        </Box>
-        {images.length > 0 ? (
-          <Box m={2}>
-            <WovenImageList
-              height={280}
-              width={"100%"}
-              itemData={images}
-            ></WovenImageList>
           </Box>
-        ) : (
-          ""
-        )}
-        <Box m={2}>
-          <Button
-            onClick={() => {
-              if (images.length == 0) {
-                let k = file.length;
-                let z = [];
-                for (let x = 0; x < k; x++) {
-                  z = [...z, URL.createObjectURL(file[x])];
-                  console.log(x);
-                }
-                setImages(z);
-                console.log(images);
-              } else {
-                setImages([]);
-              }
-            }}
-            color="primary"
-            variant="contained"
-            endIcon={<PhotoCamera />}
-            sx={{
-              width: 150,
-            }}
-          >
-            Photos
-          </Button>
-        </Box>
-        <Box m={2}>
-          <Button
-            onClick={() => {
-              // history.push("/places");
-            }}
-            type="submit"
-            color="primary"
-            variant="contained"
-            endIcon={<AddIcon />}
-            sx={{
-              width: 150,
-            }}
-          >
-            ADD Review
-          </Button>
-        </Box>
-      </form>
-    </Container>
+          <Box m={2}>
+            <Button
+              onClick={() => {
+                // history.push("/places");
+              }}
+              type="submit"
+              color="primary"
+              variant="contained"
+              endIcon={<AddIcon />}
+              sx={{
+                width: 150,
+              }}
+            >
+              ADD Review
+            </Button>
+          </Box>
+        </form>
+      </Container>
     </div>
   );
 };

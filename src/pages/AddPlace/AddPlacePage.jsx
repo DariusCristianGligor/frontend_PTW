@@ -102,7 +102,6 @@ const AddPlace = () => {
     }
   };
   return (
-    <div className="bg">
     <Container>
       <Box m={2}>
         <Typography
@@ -262,7 +261,7 @@ const AddPlace = () => {
         </Box>
       </form>
     </Container>
-    </div>
+
   );
 };
 export default AddPlace;
